@@ -1,0 +1,7 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <app-bpm-display [bpm]="getBpm()"></app-bpm-display>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <button mat-raised-button (click)="startMetronome()">Play</button>
+    <button mat-raised-button color="warn" (click)="stopMetronome()">Stop</button>
+  </div>
+</div>
