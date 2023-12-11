@@ -30,4 +30,16 @@ export class MetronomeService {
   getBpm(): number {
     return this.bpm;
   }
+
+  increaseTempo() {
+    this.stop();
+    this.bpm++;
+    this.start();
+  }
+
+  decreaseTempo() {
+    this.stop();
+    this.bpm--;
+    this.start();
+  }
 }

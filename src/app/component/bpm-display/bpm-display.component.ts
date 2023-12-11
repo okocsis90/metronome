@@ -1,4 +1,5 @@
-import {Component, Input} from '@angular/core';
+import {Component} from '@angular/core';
+import {MetronomeService} from "../../service/metronome.service";
 
 @Component({
   selector: 'app-bpm-display',
@@ -6,5 +7,11 @@ import {Component, Input} from '@angular/core';
   styleUrls: ['./bpm-display.component.css']
 })
 export class BpmDisplayComponent {
-  @Input() bpm: number = 60;
+
+  bpm: number;
+
+  constructor(metronomeService: MetronomeService) {
+    this.bpm = metronomeService.getBpm();
+  }
+
 }

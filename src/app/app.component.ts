@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {MetronomeService} from "./service/metronome.service";
 
 @Component({
   selector: 'app-root',
@@ -9,14 +8,6 @@ import {MetronomeService} from "./service/metronome.service";
 export class AppComponent {
   title = 'metronome';
 
-  constructor(private metronomeService: MetronomeService) {
-  }
-
-  startMetronome() {
-    this.metronomeService.start();
-  }
-
-  stopMetronome() {
-    this.metronomeService.stop();
+  constructor() {
   }
 }

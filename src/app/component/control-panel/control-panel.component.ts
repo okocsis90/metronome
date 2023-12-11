@@ -1,4 +1,4 @@
-import {Component, Output, EventEmitter} from '@angular/core';
+import {Component} from '@angular/core';
 import {MetronomeService} from "../../service/metronome.service";
 
 @Component({
@@ -11,19 +11,19 @@ export class ControlPanelComponent {
   constructor(private metronomeService: MetronomeService) {
   }
 
-  @Output() playClicked = new EventEmitter<void>();
-  @Output() stopClicked = new EventEmitter<void>();
-
   startMetronome() {
-    this.playClicked.emit();
+    this.metronomeService.start();
   }
 
   stopMetronome() {
-    this.stopClicked.emit();
+    this.metronomeService.stop();
   }
 
-  getBpm(): number {
-    return this.metronomeService.getBpm();
+  increaseTempo() {
+    this.metronomeService.increaseTempo();
   }
 
+  decreaseTempo() {
+    this.metronomeService.decreaseTempo();
+  }
 }
