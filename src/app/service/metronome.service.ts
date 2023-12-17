@@ -1,18 +1,22 @@
 import { Injectable } from '@angular/core';
 import {AudioService} from "./audio.service";
+import {BehaviorSubject, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root',
 })
 export class MetronomeService {
   private interval: any;
-  private bpm: number = 60;
+  private bpmSubject: BehaviorSubject<number>;
+  public bpm$: Observable<number>;
 
   constructor(private audioService: AudioService) {
+    this.bpmSubject = new BehaviorSubject<number>(60);
+    this.bpm$ = this.bpmSubject.asObservable();
   }
 
   start() {
-    const msPerBeat = 60000 / this.bpm;
+    const msPerBeat = 60000 / this.bpmSubject.value;
 
     this.interval = setInterval(() => {
       this.audioService.playTick();
@@ -24,22 +28,22 @@ export class MetronomeService {
   }
 
   setBpm(bpm: number) {
-    this.bpm = bpm;
+    this.bpmSubject.next(bpm);
+    this.stop();
+    this.start();
   }
 
   getBpm(): number {
-    return this.bpm;
+    return this.bpmSubject.value;
   }
 
   increaseTempo() {
-    this.stop();
-    this.bpm++;
-    this.start();
+    const newBpm = this.getBpm() + 1;
+    this.setBpm(newBpm);
   }
 
   decreaseTempo() {
-    this.stop();
-    this.bpm--;
-    this.start();
+    const newBpm = this.getBpm() - 1;
+    this.setBpm(newBpm);
   }
 }
