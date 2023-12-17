@@ -1,0 +1,9 @@
+<div fxLayout="row" fxLayoutAlign="center center">
+  <ng-container *ngFor="let bar of bars; let last = last">
+    <div class="bar">
+      {{ bar.getTimeSignature() }}
+    </div>
+    <div class="separator" *ngIf="!last"></div>
+  </ng-container>
+  <div (click)="addBar()">+</div>
+</div>

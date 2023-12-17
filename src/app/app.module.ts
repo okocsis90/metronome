@@ -9,12 +9,14 @@ import {AudioService} from "./service/audio.service";
 import {MetronomeService} from "./service/metronome.service";
 import {ControlPanelComponent} from './component/control-panel/control-panel.component';
 import { BpmDisplayComponent } from './component/bpm-display/bpm-display.component';
+import { BarEditorComponent } from './component/bar-editor/bar-editor.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ControlPanelComponent,
-    BpmDisplayComponent
+    BpmDisplayComponent,
+    BarEditorComponent
   ],
   imports: [
     BrowserModule,
