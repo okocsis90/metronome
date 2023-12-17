@@ -10,10 +10,10 @@ export class AudioService {
     this.audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
   }
 
-  playTick(): void {
+  playTick(frequency: number): void {
     const oscillator = this.audioContext.createOscillator();
     oscillator.type = 'sine';
-    oscillator.frequency.setValueAtTime(440, this.audioContext.currentTime);
+    oscillator.frequency.setValueAtTime(frequency, this.audioContext.currentTime);
     oscillator.connect(this.audioContext.destination);
     oscillator.start();
     oscillator.stop(this.audioContext.currentTime + 0.1);

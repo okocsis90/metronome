@@ -11,16 +11,16 @@ import {BarTrackerService} from "../../service/bar-tracker.service";
 export class BarEditorComponent {
 
   bars: Bar[] = [];
-  subscription: Subscription;
+  barsSubscription: Subscription;
 
   constructor(private barTrackerService: BarTrackerService) {
-    this.subscription = this.barTrackerService.getBarObservable().subscribe((bars) => {
+    this.barsSubscription = this.barTrackerService.getBarObservable().subscribe((bars) => {
       this.bars = bars;
     });
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.barsSubscription.unsubscribe();
   }
 
   addBar() {
