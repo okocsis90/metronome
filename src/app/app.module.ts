@@ -8,8 +8,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AudioService} from "./service/audio.service";
 import {MetronomeService} from "./service/metronome.service";
 import {ControlPanelComponent} from './component/control-panel/control-panel.component';
-import { BpmDisplayComponent } from './component/bpm-display/bpm-display.component';
-import { BarEditorComponent } from './component/bar-editor/bar-editor.component';
+import {BpmDisplayComponent} from './component/bpm-display/bpm-display.component';
+import {BarEditorComponent} from './component/bar-editor/bar-editor.component';
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { BarEditorComponent } from './component/bar-editor/bar-editor.component'
     FlexLayoutModule,
     MatButtonModule,
     BrowserAnimationsModule,
+    MatIconModule,
   ],
   providers: [
     MetronomeService,

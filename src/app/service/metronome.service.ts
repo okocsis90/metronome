@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {AudioService} from "./audio.service";
 import {BehaviorSubject, Observable, Subscription} from "rxjs";
 import {BarTrackerService} from "./bar-tracker.service";
@@ -8,11 +8,11 @@ import {Note} from "../model/note";
 @Injectable({
   providedIn: 'root',
 })
-export class MetronomeService {
-  public bpm$: Observable<number>;
+export class MetronomeService implements OnDestroy {
 
-  private interval: any;
   private bpmSubject: BehaviorSubject<number>;
+  private bpm$: Observable<number>;
+  private interval: any;
   private barsSubscription: Subscription;
   private bars: Bar[] = [];
 
@@ -20,13 +20,13 @@ export class MetronomeService {
     this.bpmSubject = new BehaviorSubject<number>(60);
     this.bpm$ = this.bpmSubject.asObservable();
 
-    this.barsSubscription = this.barTrackerService.getBarObservable().subscribe((bars) => {
+    this.barsSubscription = this.barTrackerService.getBarsObservable().subscribe((bars) => {
       this.bars = bars;
     });
   }
 
   start() {
-    if (this.bars.length === 0) {
+    if (this.bars.length === 0 || this.interval) {
       return;
     }
 
@@ -53,12 +53,12 @@ export class MetronomeService {
         }
       }
 
-
     }, msPerBeat);
   }
 
   stop() {
     clearInterval(this.interval);
+    this.interval = null;
   }
 
   setBpm(bpm: number) {
@@ -71,6 +71,10 @@ export class MetronomeService {
     return this.bpmSubject.value;
   }
 
+  getBpmObservable(): Observable<number> {
+    return this.bpm$;
+  }
+
   increaseTempo() {
     const newBpm = this.getBpm() + 1;
     this.setBpm(newBpm);
@@ -81,7 +85,7 @@ export class MetronomeService {
     this.setBpm(newBpm);
   }
 
-  private getFrequency(note: Note): number {
+  getFrequency(note: Note): number {
     return note.stressed ? 880 : 440;
   }
 

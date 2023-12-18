@@ -5,5 +5,7 @@
     </div>
     <div class="separator" *ngIf="!last"></div>
   </ng-container>
-  <div (click)="addBar()">+</div>
+  <button mat-mini-fab color="primary" class="add-bar-btn" (click)="addBar()">
+    <mat-icon aria-hidden="false" aria-label="Add bar">add</mat-icon>
+  </button>
 </div>

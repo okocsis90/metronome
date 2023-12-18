@@ -16,7 +16,7 @@ export class BarTrackerService {
     return this.barsSubject.value;
   }
 
-  getBarObservable(): Observable<Bar[]> {
+  getBarsObservable(): Observable<Bar[]> {
     return this.bars$;
   }
 

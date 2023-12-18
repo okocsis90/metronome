@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {MetronomeService} from "../../service/metronome.service";
 import {Subscription} from "rxjs";
 
@@ -10,11 +10,11 @@ import {Subscription} from "rxjs";
 export class BpmDisplayComponent implements OnDestroy {
 
   bpm: number;
-  bpmSubscription: Subscription;
+  private bpmSubscription: Subscription;
 
   constructor(private metronomeService: MetronomeService) {
     this.bpm = this.metronomeService.getBpm();
-    this.bpmSubscription = this.metronomeService.bpm$.subscribe((bpm) => {
+    this.bpmSubscription = this.metronomeService.getBpmObservable().subscribe((bpm) => {
       this.bpm = bpm;
     });
   }

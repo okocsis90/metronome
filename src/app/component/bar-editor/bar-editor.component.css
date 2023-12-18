@@ -7,3 +7,7 @@
   height: 20px;
   margin: 0 8px;
 }
+
+.add-bar-btn {
+  cursor: pointer;
+}
